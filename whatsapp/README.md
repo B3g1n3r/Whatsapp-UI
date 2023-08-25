@@ -1,3 +1,3 @@
 # whatsapp
 
-A new Flutter project.
+Just a recreation of whatsapp UI
