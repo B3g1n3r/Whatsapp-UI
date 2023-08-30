@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/screens/statusview.dart';
 
 void main() => runApp(const Whatsapp());
 
@@ -8,20 +9,21 @@ class Whatsapp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: TabBarExample(),
+      home: WhatsAppUI(),
     );
   }
 }
 
-class TabBarExample extends StatefulWidget {
-  const TabBarExample({super.key});
+class WhatsAppUI extends StatefulWidget {
+  const WhatsAppUI({super.key});
 
   @override
-  State<TabBarExample> createState() => _TabBarExampleState();
+  State<WhatsAppUI> createState() => _WhatsAppUIState();
 }
 
-class _TabBarExampleState extends State<TabBarExample>
-    with TickerProviderStateMixin {
+enum SampleItem { one, two, three }
+
+class _WhatsAppUIState extends State<WhatsAppUI> with TickerProviderStateMixin {
   late final TabController _tabcontroller;
 
   @override
@@ -38,7 +40,8 @@ class _TabBarExampleState extends State<TabBarExample>
 
   @override
   Widget build(BuildContext context) {
-    final Color appbar = const Color(0xFF128C7E);
+    const Color appbar = Color(0xFF128C7E);
+    SampleItem? SelectedMenu;
     List<String> items = [
       'Aarav',
       'Sanya',
@@ -66,13 +69,34 @@ class _TabBarExampleState extends State<TabBarExample>
         backgroundColor: appbar,
         toolbarHeight: 70,
         title: const Text('WhatsApp'),
-        actions: const [
-          Icon(Icons.camera_alt_outlined),
-          SizedBox(width: 20),
-          Icon(Icons.search),
-          SizedBox(width: 20),
-          Icon(Icons.more_vert),
-          SizedBox(width: 20),
+        actions: [
+          const Icon(Icons.camera_alt_outlined),
+          const SizedBox(width: 20),
+          const Icon(Icons.search),
+          const SizedBox(width: 20),
+          PopupMenuButton<SampleItem>(
+              initialValue: SelectedMenu,
+              onSelected: (SampleItem item) {
+                setState(() {
+                  SelectedMenu = item;
+                });
+              },
+              itemBuilder: (BuildContext context) =>
+                  <PopupMenuEntry<SampleItem>>[
+                    const PopupMenuItem<SampleItem>(
+                      value: SampleItem.one,
+                      child: Text('1'),
+                    ),
+                    const PopupMenuItem<SampleItem>(
+                      value: SampleItem.two,
+                      child: Text('2'),
+                    ),
+                    const PopupMenuItem<SampleItem>(
+                      value: SampleItem.three,
+                      child: Text('3'),
+                    ),
+                  ]),
+          const SizedBox(width: 20),
         ],
         bottom: TabBar(
           controller: _tabcontroller,
@@ -110,7 +134,7 @@ class _TabBarExampleState extends State<TabBarExample>
         controller: _tabcontroller,
         children: [
           chatView(items),
-          const Center(child: Text('Tab 2 content')),
+          statusView(),
           const Center(child: Text('Tab 3 content')),
         ],
       ),
@@ -121,6 +145,24 @@ class _TabBarExampleState extends State<TabBarExample>
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) {
+        List<String> pics = [
+          'assets/1.png',
+          'assets/2.png',
+          'assets/3.png',
+          'assets/4.png',
+          'assets/5.png',
+          'assets/6.png',
+          'assets/7.png',
+          'assets/8.png',
+          'assets/9.png',
+          'assets/10.png',
+          'assets/11.png',
+          'assets/12.png',
+          'assets/13.png',
+          'assets/14.png',
+          'assets/15.png',
+          
+        ];
         List<String> messages = [
           'Hi, how are you?',
           'Hey there!',
@@ -137,69 +179,65 @@ class _TabBarExampleState extends State<TabBarExample>
           'I need your advice on something.',
           'I miss hanging out with you!',
           'Remember that time we went on an adventure?',
-          'Wishing you a fantastic day!',
-          'Sending you positive vibes!',
-          'Let\'s catch up soon!',
-          'Thinking of you.',
-          'Hope we can meet up soon!',
+          
         ];
-        return ListTile(
-          leading: Container(
-            width: 56,
-            height: 56,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.blue,
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  'assets/avatar.jpg'
+        return InkWell(
+          onTap: () {},
+          child: ListTile(
+            leading: Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(pics[index]),
                 ),
               ),
             ),
-          ),
-          title: Text(
-            items[index],
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          subtitle: Row(
-            children: [
-              const Icon(
-                Icons.done,
-                size: 18,
-                color: Colors.grey,
-              ),
-              Flexible(
-                child: Text(
-                  messages[index],
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-          trailing: Column(
-            children: [
-              const Text(
-                '12:07 PM',
-                style: TextStyle(
+            title: Text(
+              items[index],
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Row(
+              children: [
+                const Icon(
+                  Icons.done,
+                  size: 18,
                   color: Colors.grey,
                 ),
-              ),
-              Container(
-                height: 20,
-                width: 20,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color(0xFF25D366),
+                Flexible(
+                  child: Text(
+                    messages[index],
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                child: const Center(
-                    child: Text(
-                  '1',
-                  style: TextStyle(color: Colors.white, fontSize: 14),
-                )),
-              ),
-            ],
+              ],
+            ),
+            trailing: Column(
+              children: [
+                const Text(
+                  '12:07 PM',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+                Container(
+                  height: 20,
+                  width: 20,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFF25D366),
+                  ),
+                  child: const Center(
+                      child: Text(
+                    '1',
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  )),
+                ),
+              ],
+            ),
           ),
         );
       },
