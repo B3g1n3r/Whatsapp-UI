@@ -4,24 +4,7 @@ ListView chatView(List<String> items) {
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) {
-        List<String> pics = [
-          'assets/1.png',
-          'assets/2.png',
-          'assets/3.png',
-          'assets/4.png',
-          'assets/5.png',
-          'assets/6.png',
-          'assets/7.png',
-          'assets/8.png',
-          'assets/9.png',
-          'assets/10.png',
-          'assets/11.png',
-          'assets/12.png',
-          'assets/13.png',
-          'assets/14.png',
-          'assets/15.png',
-          
-        ];
+        
         List<String> messages = [
           'Hi, how are you?',
           'Hey there!',
@@ -46,11 +29,11 @@ ListView chatView(List<String> items) {
             leading: Container(
               width: 56,
               height: 56,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(pics[index]),
+                  image: AssetImage('assets/avatar.jpg'),
                 ),
               ),
             ),

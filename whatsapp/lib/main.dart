@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/screens/callsview.dart';
 import 'package:whatsapp/screens/statusview.dart';
 
 void main() => runApp(const Whatsapp());
@@ -21,7 +22,7 @@ class WhatsAppUI extends StatefulWidget {
   State<WhatsAppUI> createState() => _WhatsAppUIState();
 }
 
-enum SampleItem { one, two, three }
+enum SampleItem { one, two, three, four, five }
 
 class _WhatsAppUIState extends State<WhatsAppUI> with TickerProviderStateMixin {
   late final TabController _tabcontroller;
@@ -58,11 +59,6 @@ class _WhatsAppUIState extends State<WhatsAppUI> with TickerProviderStateMixin {
       'Aryan',
       'Neha',
       'Rajesh',
-      'Swati',
-      'Sachin',
-      'Priya',
-      'Vivek',
-      'Divya',
     ];
     return Scaffold(
       appBar: AppBar(
@@ -85,16 +81,25 @@ class _WhatsAppUIState extends State<WhatsAppUI> with TickerProviderStateMixin {
                   <PopupMenuEntry<SampleItem>>[
                     const PopupMenuItem<SampleItem>(
                       value: SampleItem.one,
-                      child: Text('1'),
+                      child: Text('New group'),
                     ),
                     const PopupMenuItem<SampleItem>(
                       value: SampleItem.two,
-                      child: Text('2'),
+                      child: Text('New broadcast'),
                     ),
                     const PopupMenuItem<SampleItem>(
                       value: SampleItem.three,
-                      child: Text('3'),
+                      child: Text('Linked devices'),
                     ),
+                    const PopupMenuItem<SampleItem>(
+                      value: SampleItem.four,
+                      child: Text('Starred messages'),),
+                                          const PopupMenuItem<SampleItem>(
+                      value: SampleItem.four,
+                      child: Text('Payments'),),
+                                          const PopupMenuItem<SampleItem>(
+                      value: SampleItem.four,
+                      child: Text('settings'),),
                   ]),
           const SizedBox(width: 20),
         ],
@@ -135,7 +140,7 @@ class _WhatsAppUIState extends State<WhatsAppUI> with TickerProviderStateMixin {
         children: [
           chatView(items),
           statusView(),
-          const Center(child: Text('Tab 3 content')),
+          callsView()
         ],
       ),
     );
@@ -145,24 +150,6 @@ class _WhatsAppUIState extends State<WhatsAppUI> with TickerProviderStateMixin {
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) {
-        List<String> pics = [
-          'assets/1.png',
-          'assets/2.png',
-          'assets/3.png',
-          'assets/4.png',
-          'assets/5.png',
-          'assets/6.png',
-          'assets/7.png',
-          'assets/8.png',
-          'assets/9.png',
-          'assets/10.png',
-          'assets/11.png',
-          'assets/12.png',
-          'assets/13.png',
-          'assets/14.png',
-          'assets/15.png',
-          
-        ];
         List<String> messages = [
           'Hi, how are you?',
           'Hey there!',
@@ -187,11 +174,11 @@ class _WhatsAppUIState extends State<WhatsAppUI> with TickerProviderStateMixin {
             leading: Container(
               width: 56,
               height: 56,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(pics[index]),
+                  image: AssetImage('assets/avatar.jpg'),
                 ),
               ),
             ),

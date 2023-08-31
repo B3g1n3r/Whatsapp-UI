@@ -67,7 +67,7 @@ SingleChildScrollView statusView() {
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: AssetImage('assets/12.png'),
+                      image: AssetImage('assets/avatar.jpg'),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -110,7 +110,8 @@ SingleChildScrollView statusView() {
           ),
         ),
         ListView.builder(
-          physics: const NeverScrollableScrollPhysics(), 
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(), // Disable inner ListView scrolling
           itemCount: items.length,
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
