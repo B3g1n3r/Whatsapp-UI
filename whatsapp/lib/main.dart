@@ -66,10 +66,14 @@ class _WhatsAppUIState extends State<WhatsAppUI> with TickerProviderStateMixin {
         toolbarHeight: 70,
         title: const Text('WhatsApp'),
         actions: [
-          const Icon(Icons.camera_alt_outlined),
-          const SizedBox(width: 20),
-          const Icon(Icons.search),
-          const SizedBox(width: 20),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.camera_alt_outlined),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.search),
+          ),
           PopupMenuButton<SampleItem>(
               initialValue: SelectedMenu,
               onSelected: (SampleItem item) {
@@ -93,13 +97,16 @@ class _WhatsAppUIState extends State<WhatsAppUI> with TickerProviderStateMixin {
                     ),
                     const PopupMenuItem<SampleItem>(
                       value: SampleItem.four,
-                      child: Text('Starred messages'),),
-                                          const PopupMenuItem<SampleItem>(
+                      child: Text('Starred messages'),
+                    ),
+                    const PopupMenuItem<SampleItem>(
                       value: SampleItem.four,
-                      child: Text('Payments'),),
-                                          const PopupMenuItem<SampleItem>(
+                      child: Text('Payments'),
+                    ),
+                    const PopupMenuItem<SampleItem>(
                       value: SampleItem.four,
-                      child: Text('settings'),),
+                      child: Text('settings'),
+                    ),
                   ]),
           const SizedBox(width: 20),
         ],
@@ -137,11 +144,7 @@ class _WhatsAppUIState extends State<WhatsAppUI> with TickerProviderStateMixin {
       ),
       body: TabBarView(
         controller: _tabcontroller,
-        children: [
-          chatView(items),
-          statusView(),
-          callsView()
-        ],
+        children: [chatView(items), statusView(), callsView()],
       ),
     );
   }
@@ -166,7 +169,6 @@ class _WhatsAppUIState extends State<WhatsAppUI> with TickerProviderStateMixin {
           'I need your advice on something.',
           'I miss hanging out with you!',
           'Remember that time we went on an adventure?',
-          
         ];
         return InkWell(
           onTap: () {},
